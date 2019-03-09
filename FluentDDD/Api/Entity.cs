@@ -16,7 +16,8 @@ namespace FluentDDD.Api
     ///         independente de seus outros atributos.
     ///     </para>
     /// </remarks>
-    /// <typeparam name="TId"></typeparam>
+    /// <seealso cref="IEntityIdentity" />
+    /// <typeparam name="TId">A <see cref="Identity" /> da <c>Entity</c>.</typeparam>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
