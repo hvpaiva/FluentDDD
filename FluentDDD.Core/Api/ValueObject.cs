@@ -75,14 +75,14 @@ namespace FluentDDD.Api
         /// </remarks>
         /// <param name="obj">O <c>ValueObject</c> no qual será comparado com este.</param>
         /// <returns><c>true</c> se os atributos do <c>ValueObject</c> são iguais.</returns>
-        public override bool Equals(object obj)
+        public sealed override bool Equals(object obj)
         {
             return ReferenceEquals(this, obj) || !ReferenceEquals(null, obj)
                    && obj is ValueObject valueObject && Equals(valueObject);
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
+        public sealed override int GetHashCode()
         {
             return GetHashCodeCore();
         }
