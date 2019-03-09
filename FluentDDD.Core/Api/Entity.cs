@@ -49,6 +49,21 @@ namespace FluentDDD.Api
         /// <returns><c>true</c> se a <c>Entity</c> for válida.</returns>
         public abstract bool IsValid();
 
+        /// <summary>
+        ///     Confere a igualdade de duas <c>Entity</c>.
+        /// </summary>
+        /// <remarks>
+        ///     Duas <c>Entity</c> são comparadas por seus <see cref="Identity" />.
+        /// </remarks>
+        /// <param name="entity">A <c>Entity</c> a se comparar com esta.</param>
+        /// <returns><c>true</c> se as <c>Entity</c> tiverem o mesmo <see cref="Identity" />.</returns>
+        public bool Equals(Entity<TId> entity)
+        {
+            return ReferenceEquals(this, entity)
+                   || !ReferenceEquals(null, entity)
+                   && Identity.Equals(entity.Identity);
+        }
+
         #region System.Object overrides
 
         /// <summary>
@@ -57,15 +72,14 @@ namespace FluentDDD.Api
         /// <remarks>
         ///     Duas <c>Entity</c> são comparadas por seus <see cref="Identity" />.
         /// </remarks>
-        /// <param name="obj">O <c>object</c> a ser comparado com a <c>Entity</c>.</param>
-        /// <returns><c>true</c> se for considerado igual, ou <c>false</c> senão.</returns>
-        public override bool Equals(object obj)
+        /// <param name="obj">A <c>Entity</c> a se comparar com esta.</param>
+        /// <returns><c>true</c> se as <c>Entity</c> tiverem o mesmo <see cref="Identity" />.</returns>
+        public sealed override bool Equals(object obj)
         {
-            var compareTo = obj as Entity<TId>;
-
-            return ReferenceEquals(this, compareTo)
-                   || !ReferenceEquals(null, compareTo)
-                   && Identity.Equals(compareTo.Identity);
+            return ReferenceEquals(this, obj)
+                   || !ReferenceEquals(null, obj)
+                   && obj is Entity<TId> entity
+                   && Equals(entity);
         }
 
         /// <summary>
@@ -98,9 +112,9 @@ namespace FluentDDD.Api
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
+        public sealed override int GetHashCode()
         {
-            return GetType().GetHashCode() * new Random(100).Next() + Identity.GetHashCode();
+            return GetType().GetHashCode() * new Random(Identity.GetHashCode()).Next();
         }
 
         /// <summary>
