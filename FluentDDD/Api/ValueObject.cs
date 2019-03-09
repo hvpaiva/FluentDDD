@@ -15,17 +15,10 @@ namespace FluentDDD.Api
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public abstract class ValueObject : IValueObject
     {
-        #region FluentDDD.Api.IValueObject overrides
+        #region ToChildImplementation
 
         /// <inheritdoc />
-        public IValueObject Copy()
-        {
-            return (ValueObject) MemberwiseClone();
-        }
-
-        #endregion
-
-        #region ToChildImplementation
+        public abstract IValueObject Copy();
 
         /// <summary>
         ///     Confere a igualdade deste <c>ValueObject</c> com o
