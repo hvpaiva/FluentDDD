@@ -36,6 +36,10 @@ namespace FluentDDD.Api
         /// <summary>
         ///     O <see cref="IValueObject" /> identificador da <c>Entity</c>.
         /// </summary>
+        /// <remarks>
+        ///     O atributo <see cref="Identity" /> é imutável. Seguindo a lógica em que se
+        ///     o identificador mudou, trata-se de uma nova <c>Entity</c>.
+        /// </remarks>
         public TId Identity { get; }
 
         /// <summary>
