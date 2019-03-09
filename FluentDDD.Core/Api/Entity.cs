@@ -8,7 +8,7 @@ namespace FluentDDD.Api
     /// </summary>
     /// <remarks>
     ///     Uma <c>Entity</c> deve sempre possuir um identificador
-    ///     do tipo <see cref="IEntityIdentity" />.
+    ///     do tipo <see cref="IValueObject" />.
     ///     <para>
     ///         Diferente de um <see cref="ValueObject" />, uma <c>Entity</c> é comparada
     ///         por sua identidade, ou seja, se o valor de sua identidade for igual
@@ -16,17 +16,17 @@ namespace FluentDDD.Api
     ///         independente de seus outros atributos.
     ///     </para>
     /// </remarks>
-    /// <seealso cref="IEntityIdentity" />
+    /// <seealso cref="IValueObject" />
     /// <typeparam name="TId">A <see cref="Identity" /> da <c>Entity</c>.</typeparam>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public abstract class Entity<TId> where TId : IEntityIdentity
+    public abstract class Entity<TId> where TId : IValueObject
     {
         /// <summary>
         ///     Constrói uma <c>Entity</c> com seu <see cref="Identity" />.
         /// </summary>
-        /// <seealso cref="IEntityIdentity" />
+        /// <seealso cref="IValueObject" />
         /// <param name="identity">A identidade da <c>Entity</c>.</param>
         protected Entity(TId identity)
         {
@@ -34,7 +34,7 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///     O identificador <see cref="IEntityIdentity" /> da <c>Entity</c>.
+        ///     O <see cref="IValueObject" /> identificador da <c>Entity</c>.
         /// </summary>
         public TId Identity { get; }
 
@@ -105,7 +105,7 @@ namespace FluentDDD.Api
         /// <returns>Sua representação em <c>string</c>.</returns>
         public override string ToString()
         {
-            return $"{GetType().Name} [Identity = {Identity}]";
+            return $"{GetType().Name} [Id = {Identity}]";
         }
 
         #endregion
