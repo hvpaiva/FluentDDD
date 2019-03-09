@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDDD", "FluentDDD\FluentDDD.csproj", "{39D8F30B-7A82-41E0-8362-F8D290E402CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDDD.Core", "FluentDDD.Core\FluentDDD.Core.csproj", "{39D8F30B-7A82-41E0-8362-F8D290E402CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,7 +9,7 @@ namespace FluentDDD.Api
     /// </summary>
     /// <remarks>
     ///     Objetos <c>ValueObject</c> são imutáveis e são igualáveis por seus valores.
-    ///     Diferente das <see cref="T:FluentDDD.Api.Entity`1" /> que são comparados por seus identificadores.
+    ///     Diferente das <see cref="T:FluentDDD.Core.Api.Entity`1" /> que são comparados por seus identificadores.
     /// </remarks>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
