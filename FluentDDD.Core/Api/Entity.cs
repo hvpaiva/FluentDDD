@@ -5,7 +5,6 @@ namespace FluentDDD.Api
 {
     /// <summary>
     ///     A lightweight class for Entities.
-    ///     Classe base para representar uma entidade de domínio.
     /// </summary>
     /// <remarks>
     ///     <para>
@@ -14,13 +13,13 @@ namespace FluentDDD.Api
     ///     </para>
     ///     <para>
     ///         The <see cref="Identity" /> of <c>Entity</c> can't be changed, because if
-    ///         we change the <see cref="Identity"/> of an <c>Entity</c> it means that
+    ///         we change the <see cref="Identity" /> of an <c>Entity</c> it means that
     ///         it is another <c>Entity</c>.
     ///     </para>
     ///     <para>
     ///         Different from <see cref="ValueObject" />, an <c>Entity</c> is comparable
-    ///         by its <see cref="Identity"/>. That means if two <c>Entity</c> have same
-    ///         <see cref="Identity"/> value, the both are considerate the same. Even if their
+    ///         by its <see cref="Identity" />. That means if two <c>Entity</c> have same
+    ///         <see cref="Identity" /> value, the both are considerate the same. Even if their
     ///         another attributes have not the same value.
     ///     </para>
     /// </remarks>
@@ -32,7 +31,7 @@ namespace FluentDDD.Api
     public abstract class Entity<TId> where TId : IValueObject
     {
         /// <summary>
-        ///     Constructs an <c>Entity</c> with its <see cref="Identity"/>.
+        ///     Constructs an <c>Entity</c> with its <see cref="Identity" />.
         /// </summary>
         /// <seealso cref="IValueObject" />
         /// <param name="identity">The identity of the <c>Entity</c>.</param>
@@ -42,13 +41,13 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///     The getter for the <see cref="IValueObject"/> identity of
+        ///     The getter for the <see cref="IValueObject" /> identity of
         ///     the <c>Entity</c>.
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="Identity"/> attribute is immutable, because if we change
-        ///         the <see cref="Identity"/> of an <c>Entity</c>, the <c>Entity</c> are
+        ///         The <see cref="Identity" /> attribute is immutable, because if we change
+        ///         the <see cref="Identity" /> of an <c>Entity</c>, the <c>Entity</c> are
         ///         considerate a new one.
         ///     </para>
         /// </remarks>
@@ -65,7 +64,7 @@ namespace FluentDDD.Api
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity" />.
         ///     </para>
         /// </remarks>
         /// <param name="entity">The target <c>Entity</c> to be comparable with this.</param>
@@ -84,7 +83,7 @@ namespace FluentDDD.Api
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity" />.
         ///     </para>
         /// </remarks>
         /// <param name="obj">The target <c>Entity</c> to be comparable with this.</param>
@@ -98,11 +97,11 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///      Checks the equality of two <c>Entity</c>. Overrides the <c>==</c> operator.
+        ///     Checks the equality of two <c>Entity</c>. Overrides the <c>==</c> operator.
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity" />.
         ///     </para>
         /// </remarks>
         /// <param name="a">The <c>Entity</c> a.</param>
@@ -115,11 +114,11 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///      Checks if two <c>Entity</c> are <B>NOT</B> considerate equals. Overrides the <c>==</c> operator.
+        ///     Checks if two <c>Entity</c> are <B>NOT</B> considerate equals. Overrides the <c>==</c> operator.
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity" />.
         ///     </para>
         /// </remarks>
         /// <param name="a">The <c>Entity</c> a.</param>
