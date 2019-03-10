@@ -1,7 +1,7 @@
 namespace FluentDDD.Internal
 {
-    public static class ErrorMessages
+    internal static class ErrorMessages
     {
-        public const string NullOrEmptyError = @"{0} can't be empty or null.";
+        internal const string NullOrEmptyError = @"{0} can't be empty or null.";
     }
 }
