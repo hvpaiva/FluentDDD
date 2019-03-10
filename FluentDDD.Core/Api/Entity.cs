@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using FluentDDD.Internal;
 
 namespace FluentDDD.Api
 {
@@ -9,7 +10,7 @@ namespace FluentDDD.Api
     /// <remarks>
     ///     <para>
     ///         An <c>Entity</c> should <B>ALWAYS</B> have an identity of type
-    ///         <see cref="IValueObject" />.
+    ///         <see cref="ValueObject" />.
     ///     </para>
     ///     <para>
     ///         The <see cref="Identity" /> of <c>Entity</c> can't be changed, because if
@@ -23,25 +24,26 @@ namespace FluentDDD.Api
     ///         another attributes have not the same value.
     ///     </para>
     /// </remarks>
-    /// <seealso cref="IValueObject" />
+    /// <seealso cref="ValueObject" />
     /// <typeparam name="TId">The <see cref="Identity" /> of the <c>Entity</c>.</typeparam>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public abstract class Entity<TId> where TId : IValueObject
+    public abstract class Entity<TId> where TId : ValueObject
     {
         /// <summary>
         ///     Constructs an <c>Entity</c> with its <see cref="Identity" />.
         /// </summary>
-        /// <seealso cref="IValueObject" />
+        /// <seealso cref="ValueObject" />
         /// <param name="identity">The identity of the <c>Entity</c>.</param>
         protected Entity(TId identity)
         {
+            identity.Guard(nameof(identity));
             Identity = identity;
         }
 
         /// <summary>
-        ///     The getter for the <see cref="IValueObject" /> identity of
+        ///     The getter for the <see cref="ValueObject" /> identity of
         ///     the <c>Entity</c>.
         /// </summary>
         /// <remarks>

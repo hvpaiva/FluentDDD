@@ -17,12 +17,12 @@ namespace FluentDDD.Api
     /// </remarks>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public abstract class ValueObject : IValueObject
+    public abstract class ValueObject : IValueObject<ValueObject>
     {
         #region ToChildImplementation
 
         /// <inheritdoc />
-        public abstract IValueObject Copy();
+        public abstract ValueObject Copy();
 
         /// <summary>
         ///     Checks if this <c>ValueObject</c> is equals the
