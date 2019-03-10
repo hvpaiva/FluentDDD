@@ -4,63 +4,72 @@ using System.Diagnostics.CodeAnalysis;
 namespace FluentDDD.Api
 {
     /// <summary>
+    ///     A lightweight class for Entities.
     ///     Classe base para representar uma entidade de domínio.
     /// </summary>
     /// <remarks>
-    ///     Uma <c>Entity</c> deve sempre possuir um identificador
-    ///     do tipo <see cref="IValueObject" />.
     ///     <para>
-    ///         Diferente de um <see cref="ValueObject" />, uma <c>Entity</c> é comparada
-    ///         por sua identidade, ou seja, se o valor de sua identidade for igual
-    ///         à identidade de outra <c>Entity</c>, estas são consideradas iguais,
-    ///         independente de seus outros atributos.
+    ///         An <c>Entity</c> should <B>ALWAYS</B> have an identity of type
+    ///         <see cref="IValueObject" />.
     ///     </para>
     ///     <para>
-    ///         A <see cref="Identity" /> da <c>Entity</c> é <B>imutável</B>, já que ao mudar
-    ///         sua identidade, na verdade teremos outra <c>Entity</c> diferente.
+    ///         The <see cref="Identity" /> of <c>Entity</c> can't be changed, because if
+    ///         we change the <see cref="Identity"/> of an <c>Entity</c> it means that
+    ///         it is another <c>Entity</c>.
+    ///     </para>
+    ///     <para>
+    ///         Different from <see cref="ValueObject" />, an <c>Entity</c> is comparable
+    ///         by its <see cref="Identity"/>. That means if two <c>Entity</c> have same
+    ///         <see cref="Identity"/> value, the both are considerate the same. Even if their
+    ///         another attributes have not the same value.
     ///     </para>
     /// </remarks>
     /// <seealso cref="IValueObject" />
-    /// <typeparam name="TId">A <see cref="Identity" /> da <c>Entity</c>.</typeparam>
+    /// <typeparam name="TId">The <see cref="Identity" /> of the <c>Entity</c>.</typeparam>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public abstract class Entity<TId> where TId : IValueObject
     {
         /// <summary>
-        ///     Constrói uma <c>Entity</c> com seu <see cref="Identity" />.
+        ///     Constructs an <c>Entity</c> with its <see cref="Identity"/>.
         /// </summary>
         /// <seealso cref="IValueObject" />
-        /// <param name="identity">A identidade da <c>Entity</c>.</param>
+        /// <param name="identity">The identity of the <c>Entity</c>.</param>
         protected Entity(TId identity)
         {
             Identity = identity;
         }
 
         /// <summary>
-        ///     O <see cref="IValueObject" /> identificador da <c>Entity</c>.
+        ///     The getter for the <see cref="IValueObject"/> identity of
+        ///     the <c>Entity</c>.
         /// </summary>
         /// <remarks>
-        ///     O atributo <see cref="Identity" /> é imutável. Seguindo a lógica em que se
-        ///     o identificador mudou, trata-se de uma nova <c>Entity</c>.
+        ///     <para>
+        ///         The <see cref="Identity"/> attribute is immutable, because if we change
+        ///         the <see cref="Identity"/> of an <c>Entity</c>, the <c>Entity</c> are
+        ///         considerate a new one.
+        ///     </para>
         /// </remarks>
         public TId Identity { get; }
 
         /// <summary>
-        ///     Confere se a <c>Entity</c> está válida, tendo em conta suas
-        ///     regras de validação.
+        ///     Checks if the <c>Entity</c> is valid.
         /// </summary>
-        /// <returns><c>true</c> se a <c>Entity</c> for válida.</returns>
+        /// <returns><c>true</c> if the <c>Entity</c> is valid.</returns>
         public abstract bool IsValid();
 
         /// <summary>
-        ///     Confere a igualdade de duas <c>Entity</c>.
+        ///     Checks the equality of two <c>Entity</c>.
         /// </summary>
         /// <remarks>
-        ///     Duas <c>Entity</c> são comparadas por seus <see cref="Identity" />.
+        ///     <para>
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///     </para>
         /// </remarks>
-        /// <param name="entity">A <c>Entity</c> a se comparar com esta.</param>
-        /// <returns><c>true</c> se as <c>Entity</c> tiverem o mesmo <see cref="Identity" />.</returns>
+        /// <param name="entity">The target <c>Entity</c> to be comparable with this.</param>
+        /// <returns><c>true</c> if the two <c>Entity</c> have the same <see cref="Identity" /> value.</returns>
         public bool Equals(Entity<TId> entity)
         {
             return ReferenceEquals(this, entity)
@@ -71,13 +80,15 @@ namespace FluentDDD.Api
         #region System.Object overrides
 
         /// <summary>
-        ///     Confere a igualdade de duas <c>Entity</c>.
+        ///     Checks the equality of two <c>Entity</c>.
         /// </summary>
         /// <remarks>
-        ///     Duas <c>Entity</c> são comparadas por seus <see cref="Identity" />.
+        ///     <para>
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///     </para>
         /// </remarks>
-        /// <param name="obj">A <c>Entity</c> a se comparar com esta.</param>
-        /// <returns><c>true</c> se as <c>Entity</c> tiverem o mesmo <see cref="Identity" />.</returns>
+        /// <param name="obj">The target <c>Entity</c> to be comparable with this.</param>
+        /// <returns><c>true</c> if the two <c>Entity</c> have the same <see cref="Identity" /> value.</returns>
         public sealed override bool Equals(object obj)
         {
             return ReferenceEquals(this, obj)
@@ -87,14 +98,16 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///     Confere a igualdade de duas <c>Entity</c>. Sobrescrevendo o operador <c>==</c>.
+        ///      Checks the equality of two <c>Entity</c>. Overrides the <c>==</c> operator.
         /// </summary>
         /// <remarks>
-        ///     Duas <c>Entity</c> são comparadas por seus <see cref="Identity" />.
+        ///     <para>
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///     </para>
         /// </remarks>
-        /// <param name="a">A <c>Entity</c> a.</param>
-        /// <param name="b">A <c>Entity</c> b.</param>
-        /// <returns><c>true</c> se as <c>Entity</c> tiverem o mesmo <see cref="Identity" />.</returns>
+        /// <param name="a">The <c>Entity</c> a.</param>
+        /// <param name="b">The <c>Entity</c> b.</param>
+        /// <returns><c>true</c> if the two <c>Entity</c> have the same <see cref="Identity" /> value.</returns>
         public static bool operator ==(Entity<TId> a, Entity<TId> b)
         {
             return ReferenceEquals(a, null) && ReferenceEquals(b, null)
@@ -102,14 +115,16 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///     Confere se duas <c>Entity</c> são diferentes. Sobrescrevendo o operador <c>!=</c>.
+        ///      Checks if two <c>Entity</c> are <B>NOT</B> considerate equals. Overrides the <c>==</c> operator.
         /// </summary>
         /// <remarks>
-        ///     Duas <c>Entity</c> são comparadas por seus <see cref="Identity" />.
+        ///     <para>
+        ///         Two <c>Entity</c> are comparable by their <see cref="Identity"/>.
+        ///     </para>
         /// </remarks>
-        /// <param name="a">A <c>Entity</c> a.</param>
-        /// <param name="b">A <c>Entity</c> b.</param>
-        /// <returns><c>true</c> se as <c>Entity</c> não tiverem o mesmo <see cref="Identity" />.</returns>
+        /// <param name="a">The <c>Entity</c> a.</param>
+        /// <param name="b">The <c>Entity</c> b.</param>
+        /// <returns><c>true</c> if the two <c>Entity</c> have <B>NOT</B> the same <see cref="Identity" /> value.</returns>
         public static bool operator !=(Entity<TId> a, Entity<TId> b)
         {
             return !(a == b);
@@ -122,9 +137,9 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///     A representação da <c>Entity</c> em <c>string</c>.
+        ///     The <c>string</c> representation of the <c>Entity</c>.
         /// </summary>
-        /// <returns>Sua representação em <c>string</c>.</returns>
+        /// <returns>Its <c>string</c> representation.</returns>
         public override string ToString()
         {
             return $"{GetType().Name} [Id = {Identity}]";

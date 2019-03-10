@@ -1,18 +1,18 @@
 namespace FluentDDD.Api
 {
     /// <summary>
-    ///     Representação de um Value Objects.
+    ///     Represents an Value Object.
     /// </summary>
     /// <remarks>
-    ///     Um <c>IValueObject</c> é sempre imutável, e deve saber
-    ///     fornecer uma cópia de si mesmo.
+    ///     An <c>IValueObject</c> is always immutable and should
+    ///     give an way to copy itself.
     /// </remarks>
     public interface IValueObject
     {
         /// <summary>
-        ///     Cria um clone do <c>IValueObject</c>.
+        ///     Creates a copy of this <c>IValueObject</c>.
         /// </summary>
-        /// <returns>O clone deste <c>IValueObject</c>.</returns>
+        /// <returns>A copy of itself.</returns>
         IValueObject Copy();
     }
 }
