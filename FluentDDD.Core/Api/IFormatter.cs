@@ -7,7 +7,8 @@ namespace FluentDDD.Api
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         This interface should be implemented by formatters.
+    ///         This interface should not be implemented directly in your code.
+    ///         Please inherit from <see cref="Formatter"/> instead.
     ///     </para>
     ///     <para>
     ///         This provides an formatted and unformatted functions to transform the <see cref="ValueObject" />s
@@ -16,7 +17,7 @@ namespace FluentDDD.Api
     /// </remarks>
     /// <typeparam name="TType">The primitive type that the formatted or unformatted value are served.</typeparam>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public interface IFormatter<TType>
+    internal interface IFormatter<TType>
     {
         /// <summary>
         ///     Formats an value.

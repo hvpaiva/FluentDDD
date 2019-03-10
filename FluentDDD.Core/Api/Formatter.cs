@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
+using FluentDDD.Internal;
 
 namespace FluentDDD.Api
 {
@@ -15,8 +16,14 @@ namespace FluentDDD.Api
     ///     </para>
     /// </remarks>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "ParameterOnlyUsedForPreconditionCheck.Local")]
     public class Formatter : IFormatter<string>
     {
+        /// <summary>
+        ///     Message error for invalid format.
+        /// </summary>
+        private const string InvalidFormatErrorMessage = "Invalid format. This formatter cannot be used in this value.";
+
         /// <summary>
         ///     The formatted pattern.
         /// </summary>
@@ -55,30 +62,32 @@ namespace FluentDDD.Api
 
         /// <inheritdoc />
         /// <exception cref="ArgumentException">
-        ///     Throw if the value is null or empty or if the format
-        ///     can't be used by this formatter.
+        ///     Throw if the value is null or empty.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Throw if the <paramref name="value" /> can't be used in this formatter.
         /// </exception>
         public virtual string Format(string value)
         {
-            ValidateValue(value);
+            value.Guard(nameof(value));
 
-            if (!_unformatted.IsMatch(value) && !_formatted.IsMatch(value))
-                throw new ArgumentException("Invalid format.");
+            AssertFormattable(value);
 
             return IsFormatted(value) ? value : _unformatted.Replace(value, _formattedReplacement);
         }
 
         /// <inheritdoc />
         /// <exception cref="ArgumentException">
-        ///     Throw if the value is null or empty or if the format
-        ///     can't be used by this formatter.
+        ///     Throw if the value is null or empty.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Throw if the <paramref name="value" /> can't be used in this formatter.
         /// </exception>
         public virtual string Unformat(string value)
         {
-            ValidateValue(value);
+            value.Guard(nameof(value));
 
-            if (!_unformatted.IsMatch(value) && !_formatted.IsMatch(value))
-                throw new ArgumentException("Invalid format.");
+            AssertFormattable(value);
 
             return IsUnformatted(value) ? value : _formatted.Replace(value, _unformattedReplacement);
         }
@@ -89,7 +98,7 @@ namespace FluentDDD.Api
         /// </exception>
         public virtual bool IsFormatted(string value)
         {
-            ValidateValue(value);
+            value.Guard(nameof(value));
 
             return _formatted.IsMatch(value);
         }
@@ -100,22 +109,23 @@ namespace FluentDDD.Api
         /// </exception>
         public virtual bool IsUnformatted(string value)
         {
-            ValidateValue(value);
+            value.Guard(nameof(value));
 
             return _unformatted.IsMatch(value);
         }
 
         /// <summary>
-        ///     Checks if the value passes to the condition to be used by its formatter.
+        ///     Checks if the <paramref name="value" /> can be used
+        ///     by this <c>Formatter</c>.
         /// </summary>
         /// <param name="value">The value to check.</param>
-        /// <exception cref="ArgumentException">
-        ///     Throw if the value is null or empty.
+        /// <exception cref="InvalidOperationException">
+        ///     The value do not respects the formatted or unformatted patterns.
         /// </exception>
-        private static void ValidateValue(string value)
+        private void AssertFormattable(string value)
         {
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentException("Value can't be empty or null.");
+            if (_unformatted.IsMatch(value) || _formatted.IsMatch(value))
+                throw new InvalidOperationException(InvalidFormatErrorMessage);
         }
     }
 }
