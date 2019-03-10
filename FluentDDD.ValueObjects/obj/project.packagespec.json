@@ -14,7 +14,11 @@
     ],
     "frameworks": {
       "netcoreapp2.2": {
-        "projectReferences": {}
+        "projectReferences": {
+          "/home/highlander/Desenvolvimento/Pessoal/FluentDDD/FluentDDD.Core/FluentDDD.Core.csproj": {
+            "projectPath": "/home/highlander/Desenvolvimento/Pessoal/FluentDDD/FluentDDD.Core/FluentDDD.Core.csproj"
+          }
+        }
       }
     },
     "warningProperties": {

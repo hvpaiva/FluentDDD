@@ -207,6 +207,16 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "FluentDDD.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/FluentDDD.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FluentDDD.Core.dll": {}
+        }
       }
     }
   },
@@ -678,10 +688,16 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "FluentDDD.Core/1.0.0": {
+      "type": "project",
+      "path": "../FluentDDD.Core/FluentDDD.Core.csproj",
+      "msbuildProject": "../FluentDDD.Core/FluentDDD.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "FluentDDD.Core >= 1.0.0",
       "Microsoft.NETCore.App >= 2.2.0"
     ]
   },
@@ -712,7 +728,11 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/highlander/Desenvolvimento/Pessoal/FluentDDD/FluentDDD.Core/FluentDDD.Core.csproj": {
+              "projectPath": "/home/highlander/Desenvolvimento/Pessoal/FluentDDD/FluentDDD.Core/FluentDDD.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
