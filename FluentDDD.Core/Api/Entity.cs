@@ -15,6 +15,10 @@ namespace FluentDDD.Api
     ///         à identidade de outra <c>Entity</c>, estas são consideradas iguais,
     ///         independente de seus outros atributos.
     ///     </para>
+    ///     <para>
+    ///         A <see cref="Identity" /> da <c>Entity</c> é <B>imutável</B>, já que ao mudar
+    ///         sua identidade, na verdade teremos outra <c>Entity</c> diferente.
+    ///     </para>
     /// </remarks>
     /// <seealso cref="IValueObject" />
     /// <typeparam name="TId">A <see cref="Identity" /> da <c>Entity</c>.</typeparam>
