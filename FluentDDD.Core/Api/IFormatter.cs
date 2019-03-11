@@ -8,7 +8,7 @@ namespace FluentDDD.Api
     /// <remarks>
     ///     <para>
     ///         This interface should not be implemented directly in your code.
-    ///         Please inherit from <see cref="Formatter"/> instead.
+    ///         Please inherit from <see cref="Formatter" /> instead.
     ///     </para>
     ///     <para>
     ///         This provides an formatted and unformatted functions to transform the <see cref="ValueObject" />s

@@ -19,7 +19,7 @@ namespace FluentDDD.Internal
         /// <param name="paramName">The name of the param checked.</param>
         /// <param name="message">
         ///     The error message for the exception.
-        ///     The default message is in constant <see cref="ErrorMessages"/>.
+        ///     The default message is in constant <see cref="ErrorMessages" />.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     Throw if the <c>object</c> checked is <c>null</c>.
@@ -37,7 +37,7 @@ namespace FluentDDD.Internal
         /// <param name="paramName">The name of the param checked.</param>
         /// <param name="message">
         ///     The error message for the exception.
-        ///     The default message is in constant <see cref="ErrorMessages"/>.
+        ///     The default message is in constant <see cref="ErrorMessages" />.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     Throw if the <c>string</c> checked is <c>null</c> or <B>empty</B>.
@@ -60,7 +60,7 @@ namespace FluentDDD.Internal
         ///     </para>
         /// </remarks>
         /// <param name="input">The string to be splitter.</param>
-        /// <returns>The splitter <paramref name="input"/>.</returns>
+        /// <returns>The splitter <paramref name="input" />.</returns>
         public static string SplitPascalCase(this string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -75,9 +75,7 @@ namespace FluentDDD.Internal
                 if (char.IsUpper(c) && (index > 1 && !char.IsUpper(input[index - 1])
                                         || index + 1 < input.Length
                                         && !char.IsUpper(input[index + 1])))
-                {
                     stringBuilder.Append(' ');
-                }
 
                 stringBuilder.Append(c);
             }
@@ -88,9 +86,9 @@ namespace FluentDDD.Internal
         /// <summary>
         ///     In line foreach function.
         /// </summary>
-        /// <param name="source">The <see cref="IEnumerable{T}"/>.</param>
-        /// <param name="action">The <see cref="Action{T}"/>.</param>
-        /// <typeparam name="T">The type in the <see cref="IEnumerable{T}"/>.</typeparam>
+        /// <param name="source">The <see cref="IEnumerable{T}" />.</param>
+        /// <param name="action">The <see cref="Action{T}" />.</param>
+        /// <typeparam name="T">The type in the <see cref="IEnumerable{T}" />.</typeparam>
         internal static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
             foreach (var obj in source)
@@ -98,7 +96,7 @@ namespace FluentDDD.Internal
         }
 
         /// <summary>
-        ///     Searches from an <see cref="IDictionary{TKey,TValue}"/> and gets a
+        ///     Searches from an <see cref="IDictionary{TKey,TValue}" /> and gets a
         ///     an value or adds if its not exists.
         /// </summary>
         /// <param name="dict">The dictionary.</param>
@@ -112,7 +110,7 @@ namespace FluentDDD.Internal
                 return obj2;
 
             var obj3 = value();
-            dict[key] = (object) obj3;
+            dict[key] = obj3;
 
             return obj3;
         }
