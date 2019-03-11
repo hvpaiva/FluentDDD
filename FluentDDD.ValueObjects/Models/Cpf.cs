@@ -19,6 +19,11 @@ namespace FluentDDD.ValueObjects.Models
         private readonly string _code;
 
         /// <summary>
+        ///     The default formatter for <c>Cpf</c>.
+        /// </summary>
+        private readonly Formatter _formatter;
+
+        /// <summary>
         ///     Constructs the<c>Cpf</c>.
         /// </summary>
         /// <remarks>
@@ -27,25 +32,20 @@ namespace FluentDDD.ValueObjects.Models
         /// <param name="code">The <c>Cpf</c> code. Can be formatted or unformatted.</param>
         public Cpf(string code)
         {
-            _code = Formatter.Unformat(code);
+            _formatter = new CpfFormatter();
+            _code = _formatter.Unformat(code);
         }
-
-        /// <inheritdoc />
-        /// <summary>
-        ///     The default formatter for <c>Cpf</c>.
-        /// </summary>
-        public Formatter Formatter => new CpfFormatter();
 
         /// <inheritdoc />
         public string Formatted()
         {
-            return Formatter.Format(_code);
+            return _formatter.Format(_code);
         }
 
         /// <inheritdoc />
         public string Unformatted()
         {
-            return Formatter.Unformat(_code);
+            return _formatter.Unformat(_code);
         }
 
         /// <inheritdoc />
