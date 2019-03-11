@@ -142,7 +142,7 @@ namespace FluentDDD.Api
         /// </exception>
         private void AssertFormattable(string value)
         {
-            if (!_unformatted.IsMatch(value) && !_formatted.IsMatch(value))
+            if (!(_unformatted.IsMatch(value) || _formatted.IsMatch(value)))
                 throw new InvalidOperationException(InvalidFormatErrorMessage);
         }
     }
