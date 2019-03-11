@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using FluentDDD.Api;
 
@@ -8,6 +9,8 @@ namespace FluentDDD.ValueObjects.Models
     ///     Represents an <c>Ordinate</c> value.
     /// </summary>
     /// <inheritdoc />
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class Ordinate : ValueObject<Ordinate>
     {
         /// <summary>
