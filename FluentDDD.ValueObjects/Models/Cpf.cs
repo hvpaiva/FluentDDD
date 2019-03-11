@@ -8,10 +8,10 @@ namespace FluentDDD.ValueObjects.Models
     /// <summary>
     ///     Value Object de <c>Cpf</c>.
     /// </summary>
-    /// <inheritdoc cref="ValueObject" />
+    /// <inheritdoc cref="ValueObject{TValueObject}" />
     /// <inheritdoc cref="IFormattable{TValueObjectType}" />
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class Cpf : ValueObject, IFormattable<string>
+    public sealed class Cpf : ValueObject<Cpf>, IFormattable<string>
     {
         /// <summary>
         ///     Código do <c>Cpf</c> desformatado.
@@ -49,13 +49,7 @@ namespace FluentDDD.ValueObjects.Models
         }
 
         /// <inheritdoc />
-        public override ValueObject Copy()
-        {
-            return (Cpf) MemberwiseClone();
-        }
-
-        /// <inheritdoc />
-        protected override bool Equals(ValueObject other)
+        protected override bool Equals(Cpf other)
         {
             return other is Cpf cpf && _code == cpf._code;
         }
@@ -69,7 +63,7 @@ namespace FluentDDD.ValueObjects.Models
         /// <inheritdoc />
         public override string ToString()
         {
-            return _code;
+            return _formatter.Format(_code);
         }
     }
 }

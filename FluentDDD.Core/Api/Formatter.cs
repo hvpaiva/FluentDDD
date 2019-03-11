@@ -5,7 +5,6 @@ using FluentDDD.Internal;
 
 namespace FluentDDD.Api
 {
-    /// <inheritdoc />
     /// <summary>
     ///     An base class for formatters.
     /// </summary>
@@ -17,7 +16,8 @@ namespace FluentDDD.Api
     /// </remarks>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "ParameterOnlyUsedForPreconditionCheck.Local")]
-    public class Formatter : IFormatter<string>
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    public class Formatter
     {
         /// <summary>
         ///     Message error for invalid format.
@@ -60,14 +60,18 @@ namespace FluentDDD.Api
             _unformattedReplacement = unformattedReplacement;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Formats an value.
+        /// </summary>
+        /// <param name="value">The value to ve formatted.</param>
+        /// <returns>The formatted value.</returns>
         /// <exception cref="ArgumentException">
         ///     Throw if the value is null or empty.
         /// </exception>
         /// <exception cref="InvalidOperationException">
         ///     Throw if the <paramref name="value" /> can't be used in this formatter.
         /// </exception>
-        public virtual string Format(string value)
+        public string Format(string value)
         {
             value.Guard(nameof(value));
 
@@ -76,14 +80,18 @@ namespace FluentDDD.Api
             return IsFormatted(value) ? value : _unformatted.Replace(value, _formattedReplacement);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Unformat an value.
+        /// </summary>
+        /// <param name="value">The value to be unformatted.</param>
+        /// <returns>The unformatted value.</returns>
         /// <exception cref="ArgumentException">
         ///     Throw if the value is null or empty.
         /// </exception>
         /// <exception cref="InvalidOperationException">
         ///     Throw if the <paramref name="value" /> can't be used in this formatter.
         /// </exception>
-        public virtual string Unformat(string value)
+        public string Unformat(string value)
         {
             value.Guard(nameof(value));
 
@@ -92,22 +100,32 @@ namespace FluentDDD.Api
             return IsUnformatted(value) ? value : _formatted.Replace(value, _unformattedReplacement);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Checks if the <paramref name="value" /> is considerate formatted
+        ///     by this formatter.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <returns><c>true</c> if the <paramref name="value" /> is considerate formatted.</returns>
         /// <exception cref="ArgumentException">
         ///     Throw if the value is null or empty.
         /// </exception>
-        public virtual bool IsFormatted(string value)
+        public bool IsFormatted(string value)
         {
             value.Guard(nameof(value));
 
             return _formatted.IsMatch(value);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Checks if the <paramref name="value" /> is considerate unformatted
+        ///     by this formatter.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <returns><c>true</c> if the <paramref name="value" /> is considerate unformatted.</returns>
         /// <exception cref="ArgumentException">
         ///     Throw if the value is null or empty.
         /// </exception>
-        public virtual bool IsUnformatted(string value)
+        public bool IsUnformatted(string value)
         {
             value.Guard(nameof(value));
 
@@ -124,7 +142,7 @@ namespace FluentDDD.Api
         /// </exception>
         private void AssertFormattable(string value)
         {
-            if (_unformatted.IsMatch(value) || _formatted.IsMatch(value))
+            if (!_unformatted.IsMatch(value) && !_formatted.IsMatch(value))
                 throw new InvalidOperationException(InvalidFormatErrorMessage);
         }
     }

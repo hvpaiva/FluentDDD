@@ -18,23 +18,23 @@ namespace FluentDDD.Api
     ///         it is another <c>Entity</c>.
     ///     </para>
     ///     <para>
-    ///         Different from <see cref="ValueObject" />, an <c>Entity</c> is comparable
+    ///         Different from <see cref="ValueObject{TValueObject}" />, an <c>Entity</c> is comparable
     ///         by its <see cref="Identity" />. That means if two <c>Entity</c> have same
     ///         <see cref="Identity" /> value, the both are considerate the same. Even if their
     ///         another attributes have not the same value.
     ///     </para>
     /// </remarks>
-    /// <seealso cref="ValueObject" />
+    /// <seealso cref="ValueObject{TValueObject}" />
     /// <typeparam name="TId">The <see cref="Identity" /> of the <c>Entity</c>.</typeparam>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public abstract class Entity<TId> where TId : ValueObject
+    public abstract class Entity<TId> where TId : ValueObject<TId>
     {
         /// <summary>
         ///     Constructs an <c>Entity</c> with its <see cref="Identity" />.
         /// </summary>
-        /// <seealso cref="ValueObject" />
+        /// <seealso cref="ValueObject{TValueObject}" />
         /// <param name="identity">The identity of the <c>Entity</c>.</param>
         protected Entity(TId identity)
         {
@@ -43,7 +43,7 @@ namespace FluentDDD.Api
         }
 
         /// <summary>
-        ///     The getter for the <see cref="ValueObject" /> identity of
+        ///     The getter for the <see cref="ValueObject{TValueObject}" /> identity of
         ///     the <c>Entity</c>.
         /// </summary>
         /// <remarks>

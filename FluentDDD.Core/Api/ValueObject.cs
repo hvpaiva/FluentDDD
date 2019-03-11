@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FluentDDD.Api
 {
-    /// <inheritdoc />
     /// <summary>
     ///     A lightweight class for Value Objects.
     /// </summary>
@@ -14,15 +13,25 @@ namespace FluentDDD.Api
     ///         equals another if its attributes have the same value of the another <c>ValueObject</c>,
     ///         and the attributes, once initiated, can't be changed.
     ///     </para>
+    ///     <para>
+    ///         An <c>ValueObject</c> is <B>ALWAYS</B> immutable and should
+    ///         give an way to copy itself.
+    ///     </para>
     /// </remarks>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public abstract class ValueObject : IValueObject<ValueObject>
+    public abstract class ValueObject<TValueObject> where TValueObject : ValueObject<TValueObject>
     {
-        #region ToChildImplementation
+        /// <summary>
+        ///     Creates a copy of this <c>ValueObject</c>.
+        /// </summary>
+        /// <returns>A copy of itself.</returns>
+        public TValueObject Copy()
+        {
+            return (TValueObject) MemberwiseClone();
+        }
 
-        /// <inheritdoc />
-        public abstract ValueObject Copy();
+        #region ToChildImplementation
 
         /// <summary>
         ///     Checks if this <c>ValueObject</c> is equals the
@@ -36,7 +45,7 @@ namespace FluentDDD.Api
         /// </remarks>
         /// <param name="other">The target <c>ValueObject</c> for comparison.</param>
         /// <returns><c>true</c> if the attributes of both <c>ValueObject</c>s are equals.</returns>
-        protected abstract bool Equals(ValueObject other);
+        protected abstract bool Equals(TValueObject other);
 
         /// <summary>
         ///     Hash function for the <c>ValueObject</c>.
@@ -54,7 +63,7 @@ namespace FluentDDD.Api
         /// <param name="vo1">The <c>ValueObject</c> one.</param>
         /// <param name="vo2">The <c>ValueObject</c> two.</param>
         /// <returns><c>true</c> if the attributes of both <c>ValueObject</c>s are equals.</returns>
-        public static bool operator ==(ValueObject vo1, ValueObject vo2)
+        public static bool operator ==(ValueObject<TValueObject> vo1, ValueObject<TValueObject> vo2)
         {
             return ReferenceEquals(vo1, null) && ReferenceEquals(vo2, null)
                    || !ReferenceEquals(vo1, null) && !ReferenceEquals(vo2, null) && vo1.Equals(vo2);
@@ -66,7 +75,7 @@ namespace FluentDDD.Api
         /// <param name="vo1">The <c>ValueObject</c> one.</param>
         /// <param name="vo2">The <c>ValueObject</c> two.</param>
         /// <returns><c>true</c> if the attributes of both <c>ValueObject</c>s are <B>NOT</B> the same.</returns>
-        public static bool operator !=(ValueObject vo1, ValueObject vo2)
+        public static bool operator !=(ValueObject<TValueObject> vo1, ValueObject<TValueObject> vo2)
         {
             return !(vo1 == vo2);
         }
@@ -86,7 +95,7 @@ namespace FluentDDD.Api
         public sealed override bool Equals(object obj)
         {
             return ReferenceEquals(this, obj) || !ReferenceEquals(null, obj)
-                   && obj is ValueObject valueObject && Equals(valueObject);
+                   && obj is TValueObject valueObject && Equals(valueObject);
         }
 
         /// <inheritdoc />
