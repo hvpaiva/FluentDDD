@@ -49,9 +49,9 @@ namespace FluentDDD.ValueObjects.Models
         }
 
         /// <inheritdoc />
-        protected override bool Equals(Cpf other)
+        protected override bool EqualsCore(Cpf other)
         {
-            return other is Cpf cpf && _code == cpf._code;
+            return _code == other._code;
         }
 
         /// <inheritdoc />
@@ -64,6 +64,21 @@ namespace FluentDDD.ValueObjects.Models
         public override string ToString()
         {
             return _formatter.Format(_code);
+        }
+
+        public static explicit operator string(Cpf cpf)
+        {
+            return cpf.Formatted();
+        }
+
+        public static implicit operator Cpf(string cpf)
+        {
+            return new Cpf(cpf);
+        }
+
+        public bool Equals(string other)
+        {
+            return !string.IsNullOrEmpty(other) && _formatter.Unformat(other) == _code;
         }
     }
 }

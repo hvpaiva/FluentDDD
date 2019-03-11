@@ -45,7 +45,7 @@ namespace FluentDDD.Api
         /// </remarks>
         /// <param name="other">The target <c>ValueObject</c> for comparison.</param>
         /// <returns><c>true</c> if the attributes of both <c>ValueObject</c>s are equals.</returns>
-        protected abstract bool Equals(TValueObject other);
+        protected abstract bool EqualsCore(TValueObject other);
 
         /// <summary>
         ///     Hash function for the <c>ValueObject</c>.
@@ -95,7 +95,7 @@ namespace FluentDDD.Api
         public sealed override bool Equals(object obj)
         {
             return ReferenceEquals(this, obj) || !ReferenceEquals(null, obj)
-                   && obj is TValueObject valueObject && Equals(valueObject);
+                   && obj is TValueObject valueObject && EqualsCore(valueObject);
         }
 
         /// <inheritdoc />
