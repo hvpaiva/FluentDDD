@@ -18,6 +18,12 @@ namespace FluentDDD.Api
     public interface IFormattable<out TValueObjectType>
     {
         /// <summary>
+        ///     The <see cref="Formatter" /> to this
+        ///     <c>IFormattable</c> interface.
+        /// </summary>
+        Formatter Formatter { get; }
+
+        /// <summary>
         ///     The formatted representation, in primitive type,
         ///     of the <see cref="ValueObject" />.
         /// </summary>
