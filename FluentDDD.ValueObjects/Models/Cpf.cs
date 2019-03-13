@@ -2,6 +2,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using FluentDDD.Api;
 using FluentDDD.ValueObjects.Formatters;
+using ValueObjects;
+using IFormattable = FluentDDD.Api.Formatter.IFormattable;
 
 namespace FluentDDD.ValueObjects.Models
 {
@@ -9,9 +11,8 @@ namespace FluentDDD.ValueObjects.Models
     ///     Value Object de <c>Cpf</c>.
     /// </summary>
     /// <inheritdoc cref="ValueObject{TValueObject}" />
-    /// <inheritdoc cref="IFormattable{TValueObjectType}" />
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class Cpf : ValueObject<Cpf>, IFormattable<string>
+    public sealed class Cpf : ValueObject<Cpf>, IFormattable
     {
         /// <summary>
         ///     Código do <c>Cpf</c> desformatado.
@@ -19,33 +20,34 @@ namespace FluentDDD.ValueObjects.Models
         private readonly string _code;
 
         /// <summary>
-        ///     The default formatter for <c>Cpf</c>.
-        /// </summary>
-        private readonly Formatter _formatter;
-
-        /// <summary>
-        ///     Constructs the<c>Cpf</c>.
+        ///     Constructs the <c>Cpf</c>.
         /// </summary>
         /// <remarks>
         ///     The <paramref name="code" /> can be formatted or unformatted, bud should be an valid <c>Cpf</c>.
         /// </remarks>
-        /// <param name="code">The <c>Cpf</c> code. Can be formatted or unformatted.</param>
+        /// <param name="code">The <c>Cpf</c> code. Can be sended formatted or unformatted.</param>
         public Cpf(string code)
         {
-            _formatter = new CpfFormatter();
-            _code = _formatter.Unformat(code);
+            Formatter = new CpfFormatter();
+            _code = Formatter.Unformat(code);
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     The default formatter for <c>Cpf</c>.
+        /// </summary>
+        public IFormatter Formatter { get; }
 
         /// <inheritdoc />
         public string Formatted()
         {
-            return _formatter.Format(_code);
+            return Formatter.Format(_code);
         }
 
         /// <inheritdoc />
         public string Unformatted()
         {
-            return _formatter.Unformat(_code);
+            return Formatter.Unformat(_code);
         }
 
         /// <inheritdoc />
@@ -63,7 +65,7 @@ namespace FluentDDD.ValueObjects.Models
         /// <inheritdoc />
         public override string ToString()
         {
-            return _formatter.Format(_code);
+            return Formatted();
         }
 
         public static explicit operator string(Cpf cpf)
@@ -78,7 +80,7 @@ namespace FluentDDD.ValueObjects.Models
 
         public bool Equals(string other)
         {
-            return !string.IsNullOrEmpty(other) && _formatter.Unformat(other) == _code;
+            return !string.IsNullOrEmpty(other) && Formatter.Unformat(other) == _code;
         }
     }
 }

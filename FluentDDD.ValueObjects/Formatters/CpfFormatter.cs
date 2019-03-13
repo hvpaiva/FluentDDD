@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
-using FluentDDD.Api;
+using FluentDDD.Api.Formatter;
 using FluentDDD.ValueObjects.Formats;
 using FluentDDD.ValueObjects.Models;
 
@@ -17,13 +16,7 @@ namespace FluentDDD.ValueObjects.Formatters
         ///     Constructs the <see cref="CpfFormatter" />
         /// </summary>
         /// <inheritdoc />
-        public CpfFormatter()
-            : base(
-                new Regex(CpfFormat.CpfFormatted, RegexOptions.Compiled | RegexOptions.IgnoreCase),
-                new Regex(CpfFormat.CpfUnformatted, RegexOptions.Compiled | RegexOptions.IgnoreCase),
-                "$1.$2.$3-$4",
-                "$1$2$3$4"
-            )
+        public CpfFormatter() : base(CpfFormat.Formatted, CpfFormat.Unformatted)
         {
         }
     }

@@ -1,4 +1,5 @@
 using FluentDDD.ValueObjects.Models;
+using ValueObjects;
 
 namespace FluentDDD.ValueObjects.Formats
 {
@@ -11,12 +12,12 @@ namespace FluentDDD.ValueObjects.Formats
         ///     The pattern for CPF formatted.
         /// </summary>
         /// <example>114.582.016-60</example>
-        public static string CpfFormatted => @"^(\d{3})[.](\d{3})[.](\d{3})-(\d{2})$";
+        public static IFormat Formatted => new Format(@"^(\d{3})[.](\d{3})[.](\d{3})-(\d{2})$", "$1.$2.$3-$4");
 
         /// <summary>
         ///     The pattern for CPF unformatted.
         /// </summary>
         /// <example>11458201660</example>
-        public static string CpfUnformatted => @"^(\d{3})(\d{3})(\d{3})(\d{2})$";
+        public static IFormat Unformatted => new Format(@"^(\d{3})(\d{3})(\d{3})(\d{2})$", "$1$2$3$4");
     }
 }

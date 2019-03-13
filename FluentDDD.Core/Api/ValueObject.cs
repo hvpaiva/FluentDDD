@@ -1,8 +1,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using FluentDDD.Internal;
 
 namespace FluentDDD.Api
 {
+    /// <inheritdoc />
     /// <summary>
     ///     A lightweight class for Value Objects.
     /// </summary>
@@ -20,13 +22,11 @@ namespace FluentDDD.Api
     /// </remarks>
     [Serializable]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public abstract class ValueObject<TValueObject> where TValueObject : ValueObject<TValueObject>
+    public abstract class ValueObject<TValueObject> : ICloneable<TValueObject>
+        where TValueObject : ValueObject<TValueObject>
     {
-        /// <summary>
-        ///     Creates a copy of this <c>ValueObject</c>.
-        /// </summary>
-        /// <returns>A copy of itself.</returns>
-        public TValueObject Copy()
+        /// <inheritdoc />
+        public TValueObject Clone()
         {
             return (TValueObject) MemberwiseClone();
         }

@@ -5,4 +5,8 @@
         <RootNamespace>FluentDDD</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="8.1.3"/>
+    </ItemGroup>
+
 </Project>
