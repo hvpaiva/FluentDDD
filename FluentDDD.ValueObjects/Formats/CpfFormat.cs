@@ -1,5 +1,5 @@
 using FluentDDD.ValueObjects.Models;
-using ValueObjects;
+using FluentFormatter;
 
 namespace FluentDDD.ValueObjects.Formats
 {

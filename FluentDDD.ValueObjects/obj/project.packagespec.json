@@ -12,6 +12,10 @@
     "originalTargetFrameworks": [
       "netcoreapp2.2"
     ],
+    "sources": {
+      "/home/highlander/.nuget/packages/": {},
+      "https://api.nuget.org/v3/index.json": {}
+    },
     "frameworks": {
       "netcoreapp2.2": {
         "projectReferences": {
@@ -30,6 +34,10 @@
   "frameworks": {
     "netcoreapp2.2": {
       "dependencies": {
+        "FluentFormatter": {
+          "target": "Package",
+          "version": "[1.0.0, )"
+        },
         "FluentValidation": {
           "target": "Package",
           "version": "[8.1.3, )"

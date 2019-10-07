@@ -11,7 +11,7 @@ namespace FluentDDD.Api
     /// <typeparam name="TId"></typeparam>
     /// <inheritdoc />
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public abstract class AggregateRoot<TId> : Entity<TId> where TId : ValueObject<TId>
+    public abstract class AggregateRoot<TId> : Entity<TId> where TId : ValueObject
     {
         /// <inheritdoc />
         /// <summary>

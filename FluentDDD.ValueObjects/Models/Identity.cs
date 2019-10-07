@@ -17,7 +17,7 @@ namespace FluentDDD.ValueObjects.Models
     /// </remarks>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public class Identity : ValueObject<Identity>
+    public class Identity : ValueObject
     {
         /// <summary>
         ///     Constructs the <c>Identity</c>.
@@ -31,17 +31,5 @@ namespace FluentDDD.ValueObjects.Models
         ///     The getter of the <c>Identity</c> value.
         /// </summary>
         public Guid Value { get; }
-
-        /// <inheritdoc />
-        protected override bool EqualsCore(Identity other)
-        {
-            return Value == other.Value;
-        }
-
-        /// <inheritdoc />
-        protected override int GetHashCodeCore()
-        {
-            return GetType().GetHashCode() * new Random(Value.GetHashCode()).Next();
-        }
     }
 }

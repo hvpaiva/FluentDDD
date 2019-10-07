@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
-using FluentDDD.Api.Formatter;
 using FluentDDD.ValueObjects.Formats;
 using FluentDDD.ValueObjects.Models;
+using FluentFormatter;
 
 namespace FluentDDD.ValueObjects.Formatters
 {

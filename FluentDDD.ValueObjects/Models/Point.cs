@@ -1,16 +1,15 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using FluentDDD.Api;
 
 namespace FluentDDD.ValueObjects.Models
 {
     /// <summary>
-    ///     <see cref="ValueObject{TValueObject}" /> that represents an <c>Point</c> (x, y).
+    ///     <see cref="ValueObject" /> that represents an <c>Point</c> (x, y).
     /// </summary>
     /// <inheritdoc />
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public class Point : ValueObject<Point>
+    public class Point : ValueObject
     {
         /// <summary>
         ///     Constructs the <c>Point</c> by the <see cref="X" /> and <see cref="Y" /> value.
@@ -61,28 +60,6 @@ namespace FluentDDD.ValueObjects.Models
         ///     The <see cref="Ordinate" /> Y value of the <c>Point</c>.
         /// </summary>
         public Ordinate Y { get; }
-
-        /// <inheritdoc />
-        /// <summary>
-        ///     Checks if the <c>Point</c> is equals the another <c>Point</c>
-        ///     <paramref name="other" />.
-        /// </summary>
-        /// <param name="other">The other <c>Point</c> to check.</param>
-        /// <returns>
-        ///     <c>true</c> if this <see cref="P:FluentDDD.ValueObjects.Models.Point.X" /> and
-        ///     <see cref="P:FluentDDD.ValueObjects.Models.Point.Y" /> are equals
-        ///     to the <paramref name="other" />'s one.
-        /// </returns>
-        protected override bool EqualsCore(Point other)
-        {
-            return X == other.X && Y == other.Y;
-        }
-
-        /// <inheritdoc />
-        protected override int GetHashCodeCore()
-        {
-            return GetType().GetHashCode() * new Random(X.GetHashCode() + Y.GetHashCode()).Next();
-        }
 
         /// <summary>
         ///     Provides a formatted representation of the <c>Point</c>.

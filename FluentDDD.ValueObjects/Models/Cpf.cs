@@ -1,24 +1,17 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using FluentDDD.Api;
 using FluentDDD.ValueObjects.Formatters;
-using ValueObjects;
-using IFormattable = FluentDDD.Api.Formatter.IFormattable;
+using FluentFormatter;
 
 namespace FluentDDD.ValueObjects.Models
 {
     /// <summary>
     ///     Value Object de <c>Cpf</c>.
     /// </summary>
-    /// <inheritdoc cref="ValueObject{TValueObject}" />
+    /// <inheritdoc cref="ValueObject" />
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class Cpf : ValueObject<Cpf>, IFormattable
+    public sealed class Cpf : ValueObject, IFormattable
     {
-        /// <summary>
-        ///     Código do <c>Cpf</c> desformatado.
-        /// </summary>
-        private readonly string _code;
-
         /// <summary>
         ///     Constructs the <c>Cpf</c>.
         /// </summary>
@@ -29,58 +22,37 @@ namespace FluentDDD.ValueObjects.Models
         public Cpf(string code)
         {
             Formatter = new CpfFormatter();
-            _code = Formatter.Unformat(code);
+            Code = Formatter.Unformat(code);
         }
+
+        /// <summary>
+        ///     Código do <c>Cpf</c> desformatado.
+        /// </summary>
+        public string Code { get; }
 
         /// <inheritdoc />
         /// <summary>
         ///     The default formatter for <c>Cpf</c>.
         /// </summary>
+        [IgnoreMember]
         public IFormatter Formatter { get; }
 
         /// <inheritdoc />
         public string Formatted()
         {
-            return Formatter.Format(_code);
+            return Formatter.Format(Code);
         }
 
         /// <inheritdoc />
         public string Unformatted()
         {
-            return Formatter.Unformat(_code);
-        }
-
-        /// <inheritdoc />
-        protected override bool EqualsCore(Cpf other)
-        {
-            return _code == other._code;
-        }
-
-        /// <inheritdoc />
-        protected override int GetHashCodeCore()
-        {
-            return GetType().GetHashCode() * new Random(_code.GetHashCode()).Next();
+            return Formatter.Unformat(Code);
         }
 
         /// <inheritdoc />
         public override string ToString()
         {
             return Formatted();
-        }
-
-        public static explicit operator string(Cpf cpf)
-        {
-            return cpf.Formatted();
-        }
-
-        public static implicit operator Cpf(string cpf)
-        {
-            return new Cpf(cpf);
-        }
-
-        public bool Equals(string other)
-        {
-            return !string.IsNullOrEmpty(other) && Formatter.Unformat(other) == _code;
         }
     }
 }

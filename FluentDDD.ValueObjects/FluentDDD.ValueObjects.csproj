@@ -5,15 +5,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\FluentDDD.Core\FluentDDD.Core.csproj"/>
+	    <ProjectReference Include="..\FluentDDD.Core\FluentDDD.Core.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Validators"/>
+	    <Folder Include="Validators"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation" Version="8.1.3"/>
+	    <PackageReference Include="FluentFormatter" Version="1.0.0"/>
+	    <PackageReference Include="FluentValidation" Version="8.1.3"/>
     </ItemGroup>
 
 </Project>
